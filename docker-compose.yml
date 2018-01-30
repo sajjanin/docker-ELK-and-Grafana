@@ -45,8 +45,6 @@ services:
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
-    volumes:
-      - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "3000:3000"
     networks:
