@@ -5,6 +5,7 @@ services:
   elasticsearch:
     build:
       context: elasticsearch/
+    container_name: elasticsearch
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
@@ -18,6 +19,7 @@ services:
   logstash:
     build:
       context: logstash/
+    container_name: logstash
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -33,6 +35,7 @@ services:
   kibana:
     build:
       context: kibana/
+    container_name: kibana
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
@@ -49,7 +52,19 @@ services:
       - "3000:3000"
     networks:
       - elk
+    depends_on:
+      - elasticsearch
 
+  elastalert:
+    build:
+      context: elastalert/
+    container_name: elastalert
+    ports:
+      - "3030:3030"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
 
 networks:
 
