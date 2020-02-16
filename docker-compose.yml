@@ -55,16 +55,16 @@ services:
     depends_on:
       - elasticsearch
 
-  elastalert:
-    build:
-      context: elastalert/
-    container_name: elastalert
-    ports:
-      - "3030:3030"
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch
+  # elastalert:
+  #   build:
+  #     context: elastalert/
+  #   container_name: elastalert
+  #   ports:
+  #     - "3030:3030"
+  #   networks:
+  #     - elk
+  #   depends_on:
+  #     - elasticsearch
 
 networks:
 
